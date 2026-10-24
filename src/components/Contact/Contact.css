@@ -353,11 +353,65 @@ label.error {
   }
 }
 
-/* Actions */
+/* Actions & Alert Box below Button */
 .contact-form-actions {
   margin-top: 0.75rem;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+/* Simple Alert Box below Submit Button */
+.contact-alert-box {
+  display: inline-flex;
   align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.15rem;
+  border-radius: 10px;
+  font-family: var(--font-body, "Poppins", sans-serif);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.4;
+  animation: alertSlideIn 0.25s ease-out forwards;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.contact-alert-success {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #6EE7B7;
+}
+
+.contact-alert-success .contact-alert-icon {
+  color: #059669;
+  flex-shrink: 0;
+}
+
+.contact-alert-error {
+  background-color: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+}
+
+.contact-alert-error .contact-alert-icon {
+  color: #DC2626;
+  flex-shrink: 0;
+}
+
+.contact-alert-text {
+  word-break: break-word;
+}
+
+@keyframes alertSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Identical styling to View Project CTA Button */

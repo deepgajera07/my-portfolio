@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { portfolioData } from "../../config/portfolioData";
 import { web3formsConfig } from "../../config/web3formsConfig";
 import Button from "../Button";
@@ -92,15 +92,37 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [alertInfo, setAlertInfo] = useState({ show: false, type: "", message: "" });
+  const alertTimerRef = useRef(null);
+
+  const showAlert = (type, message) => {
+    if (alertTimerRef.current) {
+      clearTimeout(alertTimerRef.current);
+    }
+    setAlertInfo({ show: true, type, message });
+
+    // Automatically hide after 2 seconds
+    alertTimerRef.current = setTimeout(() => {
+      setAlertInfo((prev) => ({ ...prev, show: false }));
+    }, 2000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (alertTimerRef.current) {
+        clearTimeout(alertTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    if (submitError) setSubmitError("");
+    if (alertInfo.show) {
+      setAlertInfo({ show: false, type: "", message: "" });
+    }
 
     // Instant live validation if field was touched (jQuery Validation style)
     if (touched[name]) {
@@ -183,7 +205,6 @@ const Contact = () => {
 
       if (data.success) {
         setIsSubmitting(false);
-        setIsSubmitted(true);
         setFormData({
           name: "",
           email: "",
@@ -193,21 +214,18 @@ const Contact = () => {
         });
         setErrors({});
         setTouched({});
+        showAlert("success", "Message sent successfully!");
       } else {
         throw new Error(data.message || "Failed to submit form. Please check your Access Key.");
       }
     } catch (err) {
       console.error("Web3Forms submission error:", err);
       setIsSubmitting(false);
-      setSubmitError(
-        err?.message || "Failed to send message. Please try again or reach out directly."
+      showAlert(
+        "error",
+        err?.message || "Failed to send message. Please try again."
       );
     }
-  };
-
-  const handleResetForm = () => {
-    setIsSubmitted(false);
-    setSubmitError("");
   };
 
   return (
@@ -303,46 +321,7 @@ const Contact = () => {
                 </p>
               </div>
 
-              {/* Error Alert Box */}
-              {submitError && (
-                <div className="contact-error-box" role="alert">
-                  <AlertCircle size={22} className="contact-error-icon" />
-                  <div className="contact-error-content">
-                    <h5 className="contact-error-title">Could not send message</h5>
-                    <p className="contact-error-msg">{submitError}</p>
-                  </div>
-                  <button
-                    type="button"
-                    className="contact-error-close"
-                    onClick={() => setSubmitError("")}
-                    aria-label="Dismiss error"
-                  >
-                    ×
-                  </button>
-                </div>
-              )}
-
-              {isSubmitted ? (
-                <div className="contact-success-box" role="alert">
-                  <div className="contact-success-icon-wrap">
-                    <CheckCircle2 size={36} className="contact-success-icon" />
-                  </div>
-                  <div className="contact-success-text">
-                    <h4>Message Sent Successfully!</h4>
-                    <p>
-                      Thank you for getting in touch. Your message has been delivered to Deep Gajera, and I will respond to your inquiry shortly.
-                    </p>
-                    <button
-                      type="button"
-                      className="contact-new-message-btn"
-                      onClick={handleResetForm}
-                    >
-                      Send Another Message
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              <form className="contact-form" onSubmit={handleSubmit} noValidate>
                   {/* Name & Email Row */}
                   <div className="contact-form-row">
                     <div className="contact-form-group">
@@ -465,7 +444,7 @@ const Contact = () => {
                     )}
                   </div>
 
-                  {/* Submit Button (Hero CTA Styled) */}
+                  {/* Submit Button & Alert Box */}
                   <div className="contact-form-actions">
                     <Button
                       variant="purple"
@@ -482,9 +461,23 @@ const Contact = () => {
                         "Send Message"
                       )}
                     </Button>
+
+                    {/* Simple Alert Box below button */}
+                    {alertInfo.show && (
+                      <div
+                        className={`contact-alert-box contact-alert-${alertInfo.type}`}
+                        role="alert"
+                      >
+                        {alertInfo.type === "success" ? (
+                          <CheckCircle2 size={18} className="contact-alert-icon" />
+                        ) : (
+                          <AlertCircle size={18} className="contact-alert-icon" />
+                        )}
+                        <span className="contact-alert-text">{alertInfo.message}</span>
+                      </div>
+                    )}
                   </div>
                 </form>
-              )}
             </div>
           </div>
         </div>
