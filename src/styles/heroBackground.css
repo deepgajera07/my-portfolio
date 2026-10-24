@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Hero Background — Falling Vertical Lines Animation
+   Features:
+   - Thin 1-2px vertical light streaks with smooth purple gradient
+   - Independent animation speeds and delays for natural, non-repetitive flow
+   - Soft glow variants and leading edge light points
+   - Hardware-accelerated (will-change: transform) for 60-120fps performance
+   - Zero interaction blocking (pointer-events: none)
+   - Accessibility compliant (prefers-reduced-motion)
+   ========================================================================== */
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Faint Static Vertical Guide Tracks
+   -------------------------------------------------------------------------- */
+.hero-track-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(139, 92, 246, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    rgba(139, 92, 246, 0.06) 100%
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Falling Light Streaks
+   -------------------------------------------------------------------------- */
+.falling-streak {
+  position: absolute;
+  top: 0;
+  width: var(--streak-width, 1.5px);
+  height: var(--streak-height, 120px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(139, 92, 246, 0.25) 25%,
+    #8B5CF6 75%,
+    #C4B5FD 100%
+  );
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(-250px);
+  animation-name: fallStreakAnimation;
+  animation-duration: var(--streak-duration, 6s);
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-delay: var(--streak-delay, 0s);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* Subtle glow modifier */
+.falling-streak.has-glow {
+  box-shadow: 0 0 10px 1px rgba(139, 92, 246, 0.65), 0 0 20px 2px rgba(167, 139, 250, 0.35);
+}
+
+/* Leading glowing point / head of streak */
+.streak-dot {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 6px 1px #C4B5FD, 0 0 14px 3px rgba(139, 92, 246, 0.85);
+  pointer-events: none;
+}
+
+/* Keyframe for continuous falling motion */
+@keyframes fallStreakAnimation {
+  0% {
+    transform: translateY(-260px);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--streak-opacity, 0.55);
+  }
+  85% {
+    opacity: var(--streak-opacity, 0.55);
+  }
+  100% {
+    transform: translateY(calc(100vh + 300px));
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Tablet Optimizations (<= 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .hero-track-line.desktop-only,
+  .falling-streak.desktop-only {
+    display: none;
+  }
+
+  .falling-streak.has-glow {
+    box-shadow: 0 0 6px 1px rgba(139, 92, 246, 0.45);
+  }
+
+  .streak-dot {
+    width: 2.5px;
+    height: 2.5px;
+    box-shadow: 0 0 4px 1px #C4B5FD, 0 0 8px 2px rgba(139, 92, 246, 0.6);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-track-line {
+    opacity: 0.2;
+  }
+
+  .falling-streak {
+    --streak-opacity: 0.45;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion Accessibility
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .falling-streak {
+    animation: none !important;
+    transform: translateY(30vh) !important;
+    opacity: 0.12 !important;
+  }
+
+  .streak-dot {
+    display: none;
+  }
+}

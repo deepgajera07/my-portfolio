@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Skills Section Styles — Pure White Section
+   Default: Brand Color Background with Pure White Icon & Text
+   Hover: Hero Matte-Black Background (#0B0B0D) with Vibrant Brand Colored Icon & White Text
+   ========================================================================== */
+
+/* Main Section Wrapper — Pure White Background */
+.skills-section {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #3F3F46;
+  padding: 0 0 6.5rem 0;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top: 1px solid #F4F4F5;
+}
+
+/* Inner Responsive Container */
+.skills-container {
+  width: 100%;
+  max-width: var(--container-width, 1440px);
+  margin: 0 auto;
+  padding-left: var(--container-padding, 2.5rem);
+  padding-right: var(--container-padding, 2.5rem);
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Left-Aligned Header Group */
+.skills-header {
+  margin-bottom: 3.5rem;
+  width: 100%;
+}
+
+.skills-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, "Poppins", sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent, #8B5CF6);
+  margin-bottom: 0.85rem;
+}
+
+.skills-title {
+  font-family: var(--font-heading, "Mileast", serif);
+  font-size: clamp(2.75rem, 4.8vw, 4.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-primary, #24104F);
+  letter-spacing: 0.01em;
+  margin: 0 0 1rem 0;
+}
+
+.skills-title-accent {
+  color: var(--color-accent, #8B5CF6);
+}
+
+.skills-title-dot {
+  color: var(--color-accent, #8B5CF6);
+}
+
+.skills-subtitle {
+  font-family: var(--font-body, "Poppins", sans-serif);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #52525B;
+  margin: 0;
+}
+
+/* Skills Responsive Grid (7 skills aligned seamlessly) */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1.35rem;
+  width: 100%;
+}
+
+/* Individual Skill Card */
+.skill-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.25rem 1.25rem;
+  min-height: 165px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #F8F5FF 0%, rgba(139, 92, 246, 0.52) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.52);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* Icon Container */
+.skill-icon-wrapper {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Default state: Original Brand Icon Color */
+.skill-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Skill Name — Dark Purple in Default, Pure White on Hover */
+.skill-name {
+  font-family: var(--font-body, "Poppins", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary, #24104F);
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast, 0.25s ease);
+}
+
+/* Hover State — Matte-Black Background (#0B0B0D) without shadow or border */
+.skill-card:hover,
+.skill-card:focus-visible {
+  background: #0B0B0D;
+  border-color: transparent;
+  box-shadow: none;
+  transform: translateY(-5px);
+}
+
+.skill-card:hover .skill-icon-img,
+.skill-card:focus-visible .skill-icon-img {
+  transform: scale(1.15);
+}
+
+.skill-card:hover .skill-name,
+.skill-card:focus-visible .skill-name {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+/* Laptop Screens (1024px – 1280px) */
+@media (max-width: 1280px) {
+  .skills-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* Tablets (768px – 1023px) */
+@media (max-width: 1023px) {
+  .skills-section {
+    padding: 0 0 4.5rem 0;
+  }
+
+  .skills-header {
+    margin-bottom: 3rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .skill-card {
+    padding: 2rem 1rem;
+    min-height: 155px;
+  }
+}
+
+/* Mobile Devices (360px – 767px) */
+@media (max-width: 767px) {
+  .skills-section {
+    padding: 0 0 3.5rem 0;
+  }
+
+  .skills-container {
+    padding-left: var(--container-padding-mobile, 1.25rem);
+    padding-right: var(--container-padding-mobile, 1.25rem);
+  }
+
+  .skills-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .skills-eyebrow {
+    font-size: 0.775rem;
+  }
+
+  .skills-title {
+    font-size: 2.25rem;
+  }
+
+  .skills-subtitle {
+    font-size: 0.9125rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 1.75rem 0.85rem;
+    min-height: 140px;
+    border-radius: 12px;
+  }
+
+  .skill-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 0.85rem;
+  }
+
+  .skill-icon-img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .skill-name {
+    font-size: 0.9125rem;
+  }
+}

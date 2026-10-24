@@ -1,0 +1,6 @@
+@import "./styles/variables.css";
+@import "./styles/global.css";
+@import "./styles/header.css";
+@import "./styles/hero.css";
+@import "./styles/heroBackground.css";
+@import "./styles/responsive.css";

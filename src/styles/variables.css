@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "Mileast";
+  src: url("../assets/fonts/Mileast.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mileast";
+  src: url("../assets/fonts/Mileast Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Exact Purple Tech Palette */
+  --color-primary: #24104F;
+  --color-secondary: #4C1D95;
+  --color-accent: #8B5CF6;
+  --color-accent-hover: #A78BFA;
+  --color-accent-subtle: rgba(139, 92, 246, 0.15);
+  --color-section: #F5F3FF;
+  --color-white: #FFFFFF;
+  --color-text-dark: #3F3F46;
+
+  /* Matte-Black Dark Theme */
+  --color-background-dark: #0B0B0D;
+  --color-header-bg: #0B0B0D;
+  --color-surface-dark: #121215;
+  --color-text-primary: #FFFFFF;
+  --color-text-muted: #B8B5C2;
+  --color-text-dim: #71717A;
+  --color-border-dark: rgba(255, 255, 255, 0.12);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Typography */
+  --font-heading: "Mileast", "Jockey One", serif;
+  --font-body: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Layout & Sizing */
+  --header-height: 84px;
+  --container-width: 1440px;
+  --container-padding: 2.5rem;
+  --container-padding-mobile: 1.25rem;
+
+  /* Transitions & Radii */
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.35s ease;
+  --radius-button: 6px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}

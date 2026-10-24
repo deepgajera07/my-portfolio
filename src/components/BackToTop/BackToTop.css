@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Back To Top Floating Button Styles
+   Smooth Entrance, Purple Accent Hover & Cohesive Floating Placement
+   ========================================================================== */
+
+.back-to-top-btn {
+  position: fixed;
+  bottom: 106px;
+  right: 38px;
+  z-index: 9998;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #18181B;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Visible State when scrolled past threshold */
+.back-to-top-btn.back-to-top-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Hover & Active States */
+.back-to-top-btn:hover {
+  background-color: var(--color-accent, #8B5CF6);
+  border-color: var(--color-accent, #8B5CF6);
+  color: #FFFFFF;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+}
+
+.back-to-top-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.back-to-top-btn svg {
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.back-to-top-btn:hover svg {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: 90px;
+    right: 25px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+}

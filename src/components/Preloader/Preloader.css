@@ -1,0 +1,153 @@
+/* ==========================================================================
+   Liquid Loader Preloader — Pure White Background Theme
+   Adapted from Uiverse.io by ShaikhWahid99 for White Background
+   ========================================================================== */
+
+.preloader-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFFFFF;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, visibility;
+  pointer-events: auto;
+}
+
+.preloader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Liquid Loader Container */
+.liquid-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px;
+  font-family: var(--font-body, "Poppins", -apple-system, BlinkMacSystemFont, sans-serif);
+}
+
+/* Loading Text with glowing dots */
+.loading-text {
+  color: var(--color-primary, #24104F);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: textGlow 1.8s ease-in-out infinite;
+  user-select: none;
+}
+
+.dot {
+  margin-left: 2px;
+  color: var(--color-accent, #8B5CF6);
+  display: inline-block;
+  animation: blink 1.5s infinite;
+}
+
+.dot:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-of-type(2) {
+  animation-delay: 0.3s;
+}
+
+.dot:nth-of-type(3) {
+  animation-delay: 0.6s;
+}
+
+/* Light-Themed Loader Track for Pure White Background */
+.loader-track {
+  position: relative;
+  width: 220px;
+  height: 32px;
+  background: linear-gradient(135deg, #F8F5FF, #EDE9FE);
+  border: 1.5px solid rgba(139, 92, 246, 0.28);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 2px 4px rgba(36, 16, 79, 0.08),
+    0 4px 12px rgba(139, 92, 246, 0.1);
+}
+
+/* Vibrant Gradient Liquid Fill */
+.liquid-fill {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 4px);
+  background: linear-gradient(90deg, #4F46E5, #7C3AED, #8B5CF6, #EC4899, #F59E0B);
+  border-radius: 14px;
+  animation:
+    fillProgress 3.2s ease-in-out infinite,
+    colorShift 3s linear infinite;
+  box-shadow:
+    0 0 14px rgba(124, 58, 237, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Keyframe Animations */
+@keyframes fillProgress {
+  0% {
+    width: 6px;
+  }
+  25% {
+    width: 28%;
+  }
+  50% {
+    width: 55%;
+  }
+  75% {
+    width: 82%;
+  }
+  100% {
+    width: calc(100% - 4px);
+  }
+}
+
+@keyframes colorShift {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  33% {
+    filter: hue-rotate(90deg) brightness(1.05);
+  }
+  66% {
+    filter: hue-rotate(220deg) brightness(0.95);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(1);
+  }
+}
+
+@keyframes textGlow {
+  0%,
+  100% {
+    opacity: 0.85;
+    text-shadow: 0 0 8px rgba(139, 92, 246, 0.2);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 16px rgba(139, 92, 246, 0.45);
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.2;
+  }
+}
